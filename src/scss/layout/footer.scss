@@ -1,0 +1,15 @@
+footer {
+  width: 100%;
+  padding: 10px 20px;
+  box-shadow: 0 0 10px rgba($color: #012030, $alpha: 0.3);
+  background-color: #012030;
+  color: white;
+    position: absolute;
+    bottom: 0;
+    margin-top: 200px;
+  .logo {
+    font-family: "Rock Salt", cursive;
+    color: white;
+    font-size: 20px;
+  }
+}

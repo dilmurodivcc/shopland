@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 import useStore from "../../hooks/useStore"; 
 import img from "../../assets/authimg.webp";
+import useAuth from "../../hooks/useAuth";
 
 const LoginForm = () => {
   const { toggleAuth } = useStore();
   const [isReversed, setIsReversed] = useState(false);
-
+  const {loginMutation} = useAuth();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log("Form submitted");
+    // console.log(e.target[0].value);
+    // console.log(e.target[1].value);
+    loginMutation.mutate({ username: e.target[0].value, password: e.target[1].value});
+    
+  };
   const handleToggle = () => {
     setIsReversed(!isReversed);
     toggleAuth("register");
@@ -13,11 +22,11 @@ const LoginForm = () => {
 
   return (
     <div className={`login-content ${isReversed ? "reverse" : ""}`}>
-      <form>
-        <h2>Sign In</h2>
-        <input type="email" placeholder="Username" />
+      <form onSubmit={handleSubmit}>
+        <h2>Log In</h2>
+        <input type="text" placeholder="Username" />
         <input type="password" placeholder="Password" />
-        <button>Sign In</button>
+        <button>Log In</button>
       </form>
       <div className="toggle">
         <div className="toggle-stick"></div>
