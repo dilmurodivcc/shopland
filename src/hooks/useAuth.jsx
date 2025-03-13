@@ -22,7 +22,6 @@ const register = async ({ username, password, name }) => {
 }
 const useAuth = () => {
   const navigate = useNavigate();
-  // const { setUser } = useStore();
   const loginMutation = useMutation({
     mutationFn: login,
     onSuccess(data) {
@@ -34,7 +33,7 @@ const useAuth = () => {
       toast.success("Login successful!");
     },
     onError() {
-      toast.error(error.response.data.message);
+      toast.error("Login failed!");
     },
   });
 
@@ -43,14 +42,13 @@ const useAuth = () => {
     onSuccess(data) {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user)); 
-      // setUser(data.user); 
       console.log(data.user);
       
       navigate("/");
       toast.success("Registration successful!");
     },
     onError() {
-      toast.error(error.response.data.message);
+        toast.error("Registration failed!");
     }  
   });
 

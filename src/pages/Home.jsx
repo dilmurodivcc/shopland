@@ -7,7 +7,8 @@ const Home = () => {
         <div className="hero">
           <h1>
             <span className="shopland">shopland </span>
-            The God <br />Of Shops
+            The God <br />Of Shops.
+            
           </h1>
         </div>
       </div>

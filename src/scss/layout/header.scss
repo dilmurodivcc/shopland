@@ -11,6 +11,8 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: #e0f7ffc3;
+  z-index: 100;
   nav {
     display: flex;
     align-items: center;
@@ -19,6 +21,14 @@ header {
   .nav-link {
     color: #012030;
     font-weight: 500;
+    padding-bottom: 1px;
+    border-bottom: 2px solid transparent;
+
+    &.active {
+      color: #cc53e5;
+      font-weight: bold;
+      border-bottom: 2px solid #cc53e5;
+    }
   }
   .logo {
     font-family: "Rock Salt", cursive;
@@ -39,7 +49,7 @@ header {
       width: 85%;
       height: 100%;
       border-radius: 10px 0 0 10px;
-      padding-left: 15px ;
+      padding-left: 15px;
       background-color: #d7ebf1;
     }
     button {
