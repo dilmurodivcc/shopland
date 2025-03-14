@@ -1,0 +1,51 @@
+.profile-content {
+  width: 800px;
+  height: 400px;
+  border: 1px solid #111;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-top: 200px;
+  border-radius: 30px;
+  background-color: rgba(224, 247, 255, 0.6901960784);
+  padding: 20px;
+}
+.profile-content .left {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.profile-content .left .btns {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.profile-content .left .btns button {
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.profile-content .left .btns .out {
+  background-color: #d45d91;
+}
+.profile-content .left .btns .copy {
+  background-color: #518AFD;
+}
+.profile-content .left img {
+  width: 80%;
+}
+.profile-content .right {
+  margin-right: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.profile-content .right h2 {
+  font-size: 30px;
+  text-transform: capitalize;
+}/*# sourceMappingURL=profile.css.map */

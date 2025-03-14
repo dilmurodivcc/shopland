@@ -38,9 +38,59 @@ header {
   .avatar {
     width: 50px;
     height: 50px;
+    // padding: 2px;
+    border-radius: 50%;
+  }
+  .nav-avatar {
+    border-radius: 50%;
+    border: 2px solid transparent;
+    height: max-content;
+    width: max-content;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    &.active{
+      border: 2px solid #cc53e5;
+    }
+  }
+  .input-container {
+    position: relative;
+    width: 40%;
+    .search-content {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      top: 45px;
+      width: 100%;
+      background-color: #e0f7ff;
+      border-radius:10px;
+      padding: 10px;
+      box-shadow: 0 0 10px #01203049;
+      .line{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        button{
+          padding: 2px 7px;
+          border-radius: 10px;
+          background-color: #011e2cd5;
+          color: white;
+          font-weight: 600;
+          font-size: 12px;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+          margin-top: -10px;
+          &:hover{
+            transform: scale(1.1);
+          }
+          
+        }
+      }
+    }
   }
   .input-bar {
-    width: 40%;
+    width: 100%;
     height: 40px;
     box-shadow: 0 0 10px #01203049;
     border-radius: 10px;
