@@ -5,17 +5,16 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
 import "antd/dist/reset.css";
 
-
 const queryClient = new QueryClient();
 function App() {
   return (
     <>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <RouterPage />
-        <Toaster position="top-right"  closeButton/>
-      </BrowserRouter>
-    </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <RouterPage />
+          <Toaster position="top-right" closeButton />
+        </BrowserRouter>
+      </QueryClientProvider>
     </>
   );
 }

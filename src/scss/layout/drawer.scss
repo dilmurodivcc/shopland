@@ -3,114 +3,14 @@
   height: 100vh;
   position: relative;
   margin-top: 20px;
-  .drawer {
-    position: absolute;
-    height: 75%;
-    width: 18vw;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    box-shadow: 0 0 10px rgba($color: #012030, $alpha: 0.3);
-    background-color: #e0f7ffd8;
-    border-radius: 0 30px 30px 0;
-    padding: 20px;
-    display: flex;
-    align-items: start;
-    justify-content: start;
-    flex-direction: column;
-    transition: all 0.5s ease-in-out;
-    animation: drawer 0.5s ease-in-out;
-    gap: 20px;
-    .username {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      width: 100%;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #012030;
-      color: #012030;
-      img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-      }
-      h3 {
-        font-size: 20px;
-        font-weight: 600;
-      }
-    }
-    .group-items {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .group-item {
-      margin-left: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      .return {
-        font-size: 14px;
-      }
-      h4 {
-        font-size: 16px;
-        display: flex;
-        width: 100%;
-        align-items: center;
-        justify-content: space-between;
-        padding-right: 1.5px;
-      }
-    }
-    .title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      margin-bottom: 10px;
-      h3,
-      .arrow {
-        color: #012030;
-      }
-    }
-    .arrow {
-      cursor: pointer;
-      transition: all 0.2s ease-in-out;
-      font-size: 20px;
-      font-weight: 700;
-      &:hover {
-        color: #cc53e5;
-        transform: scale(1.2);
-      }
-    }
-    .group-list {
-      width: 100%;
-      height: 100%;
-      border-radius: 0 25px 25px 0;
-      border: 1px dashed #012030;
-      position: relative;
-      overflow-y: scroll;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-      &::-webkit-scrollbar {
-        width: 0px;
-      }
-      .empty {
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-      }
-    }
+
+}
+@keyframes drawer {
+  from {
+    transform: translateX(-100%) scale(0) translateY(-50%);
   }
-  @keyframes drawer {
-    from {
-      transform: translateX(-100%) scale(0) translateY(-50%);
-    }
-    to {
-      transform: translateX(0) scale(1) translateY(-50%);
-    }
+  to {
+    transform: translateX(0) scale(1) translateY(-50%);
   }
 }
 .drawer-user {
@@ -130,6 +30,146 @@
   flex-direction: column;
   transition: all 0.5s ease-in-out;
   animation: drawer-user 0.5s ease-in-out;
+  gap: 20px;
+  .owner {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    gap: 10px;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #012030;
+    color: #012030;
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    h3 {
+      font-size: 24px;
+      font-weight: 900;
+    }
+    h4 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+  .group-items {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .group-item {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .return {
+      font-size: 14px;
+    }
+    h4 {
+      font-size: 16px;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      padding-right: 1.5px;
+    }
+  }
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+    h3,
+    .arrow {
+      color: #012030;
+    }
+  }
+  .arrow {
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-size: 20px;
+    font-weight: 700;
+    &:hover {
+      color: #cc53e5;
+      transform: scale(1.2);
+    }
+  }
+  .group-list {
+    width: 100%;
+    height: 100%;
+    border-radius: 25px 0 0 25px;
+
+    border: 1px dashed #012030;
+    position: relative;
+    overflow-y: scroll;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    &::-webkit-scrollbar {
+      width: 0px;
+    }
+    .empty {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+    }
+    .member {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      border-radius: 20px 0 0 20px;
+      border: 1px dashed #012030;
+      width: 100%;
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+      h4 {
+        font-size: 18px;
+        font-weight: 600;
+      }
+    }
+  }
+  @keyframes drawer-user {
+    from {
+      transform: translateX(100%) scale(0) translateY(-50%);
+    }
+    to {
+      transform: translateX(0) scale(1) translateY(-50%);
+    }
+  }
+}
+
+.drawer {
+  position: absolute;
+  height: 75%;
+  width: 18vw;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 0 10px rgba($color: #012030, $alpha: 0.3);
+  background-color: #e0f7ffd8;
+  border-radius: 0 30px 30px 0;
+  padding: 20px;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  flex-direction: column;
+  transition: all 0.5s ease-in-out;
+  animation: drawer 0.5s ease-in-out;
   gap: 20px;
   .username {
     display: flex;
@@ -185,7 +225,7 @@
   }
   .arrow {
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     font-size: 20px;
     font-weight: 700;
     &:hover {
@@ -196,7 +236,7 @@
   .group-list {
     width: 100%;
     height: 100%;
-    border-radius: 25px 0 0 25px;
+    border-radius: 0 25px 25px 0;
     border: 1px dashed #012030;
     position: relative;
     overflow-y: scroll;
@@ -211,40 +251,6 @@
       left: 50%;
       transform: translate(-50%, -50%);
       width: 100%;
-    }
-  }
-  @keyframes drawer-user {
-    from {
-      transform: translateX(100%) scale(0) translateY(-50%);
-    }
-    to {
-      transform: translateX(0) scale(1) translateY(-50%);
-    }
-  }
-}
-.product-container {
-  position: absolute;
-  top: 50%;
-  left: 47%;
-  border-radius: 30px;
-  transform: translate(-50%, -50%) scale(1);
-  width: 55vw;
-  height: 75%;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-  box-shadow: 0 0 10px rgba($color: #012030, $alpha: 0.3);
-  background-color: #e0f7ffd8;
-  animation: zoom-out 0.5s ease forwards;
-  &::-webkit-scrollbar {
-    width: 0px;
-  }
-  @keyframes zoom-out {
-    from {
-      transform: translate(-50%, -50%) scale(0) ;
-    }
-    to {
-      transform: translate(-50%, -50%) scale(1);
     }
   }
 }

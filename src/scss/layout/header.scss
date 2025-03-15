@@ -48,7 +48,7 @@ header {
     display: grid;
     place-items: center;
     padding: 0;
-    &.active{
+    &.active {
       border: 2px solid #cc53e5;
     }
   }
@@ -62,15 +62,15 @@ header {
       top: 45px;
       width: 100%;
       background-color: #e0f7ff;
-      border-radius:10px;
+      border-radius: 10px;
       padding: 10px;
       box-shadow: 0 0 10px #01203049;
-      .line{
+      .line {
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        button{
+        button {
           padding: 2px 7px;
           border-radius: 10px;
           background-color: #011e2cd5;
@@ -80,10 +80,9 @@ header {
           cursor: pointer;
           transition: all 0.2s ease-in-out;
           margin-top: -10px;
-          &:hover{
+          &:hover {
             transform: scale(1.1);
           }
-          
         }
       }
     }
@@ -99,7 +98,8 @@ header {
       height: 100%;
       border-radius: 10px 0 0 10px;
       padding-left: 15px;
-      background-color: #d7ebf1;
+      background-color: transparent;
+      backdrop-filter: blur(10px);
     }
     button {
       width: 15%;
@@ -108,6 +108,11 @@ header {
       background-color: #011e2cd5;
       color: white;
       font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        background-color: #012030;
+      }
     }
   }
 }

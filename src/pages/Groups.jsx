@@ -62,15 +62,23 @@ const Groups = () => {
           </div>
         </div>
 
-        <div className="product-container"></div>
+        <div className="product-container">
+          <div className="product-header">
+            <h3>Items</h3>
+            <form >
+              <input type="text" placeholder="Write a Title of item.." />
+              <button>Add Item</button>
+            </form>
+          </div>
+        </div>
         <div className="drawer-user ">
-          <Link className="username" to="/profile">
-            <img src={avatar} alt="User Avatar" />
-            <h3>{userdata.username}</h3>
-          </Link>
+       <div className="owner">
+        <h3> Owner:</h3>
+        <h4>Abdulloh (dilmurodvcc)</h4>
+       </div>
           <div className="group-items">
             <div className="title">
-              <h3>Groups</h3>
+              <h3>Members</h3>
               <IoIosArrowDown className="arrow" />
             </div>
             <div
@@ -80,23 +88,60 @@ const Groups = () => {
             >
               <BsArrowReturnRight className="return" />
               <h4>
-                {" "}
-                Create Group <FaPlus />
+                Add Member <FaPlus />
               </h4>
             </div>
           </div>
           <div className="group-list">
-            <div className="group-item">
-              <Empty
+              {/* <Empty
                 className="empty"
                 image={Empty.PRESENTED_IMAGE_SIMPLE}
-                description="No groups found"
-              />
-            </div>
+                description="No members found"
+              /> */}
+              <div className="member">
+                <img src={avatar} alt="User Avatar" />
+                <h4>Abdulloh (dilmurodvcc)</h4>
+              </div>
+              <div className="member">
+                <img src={avatar} alt="User Avatar" />
+                <h4>Abdulloh (dilmurodvcc)</h4>
+              </div>
+              <div className="member">
+                <img src={avatar} alt="User Avatar" />
+                <h4>Abdulloh (dilmurodvcc)</h4>
+              </div>
+              <div className="member">
+                <img src={avatar} alt="User Avatar" />
+                <h4>Abdulloh (dilmurodvcc)</h4>
+              </div>
+              <div className="member">
+                <img src={avatar} alt="User Avatar" />
+                <h4>Abdulloh (dilmurodvcc)</h4>
+              </div>
+              <div className="member">
+                <img src={avatar} alt="User Avatar" />
+                <h4>Abdulloh (dilmurodvcc)</h4>
+              </div>
+              <div className="member">
+                <img src={avatar} alt="User Avatar" />
+                <h4>Abdulloh (dilmurodvcc)</h4>
+              </div>
+              <div className="member">
+                <img src={avatar} alt="User Avatar" />
+                <h4>Abdulloh (dilmurodvcc)</h4>
+              </div>
+              <div className="member">
+                <img src={avatar} alt="User Avatar" />
+                <h4>Abdulloh (dilmurodvcc)</h4>
+              </div>
+              <div className="member">
+                <img src={avatar} alt="User Avatar" />
+                <h4>Abdulloh (dilmurodvcc)</h4>
+              </div>
           </div>
         </div>
       </div>
-
+ 
       <Modal
         title="Group name and password"
         open={isModalOpen}

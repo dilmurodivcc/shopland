@@ -1,3 +1,10 @@
+.groups {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  margin-top: 20px;
+}
+
 .ant-modal-content {
   background-color: #e0f7ffe5 !important;
   border-radius: 30px 30px 30px 0 !important;
@@ -30,4 +37,81 @@
 
 .ant-modal-header {
   background-color: transparent !important;
+}
+
+.product-container {
+  position: absolute;
+  top: 50%;
+  left: 47%;
+  border-radius: 30px;
+  transform: translate(-50%, -50%) scale(1);
+  width: 55vw;
+  height: 75%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  box-shadow: 0 0 10px rgba($color: #012030, $alpha: 0.3);
+  background-color: #e0f7ffd8;
+  animation: zoom-out 0.5s ease forwards;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  .product-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 2px solid #012030;
+    h3 {
+      font-size: 24px;
+      font-weight: 600;
+    }
+    form {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    input {
+      width: 300px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: none;
+      box-shadow: none;
+      background-color: #f5fdff;
+      font-weight: 500;
+      font-size: 16px;
+      box-shadow: 0 0 20px rgba($color: #0120309a, $alpha: 0.1);
+    }
+    button {
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: none;
+      box-shadow: none;
+      background-color: #012030dd;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      font-weight: bold;
+      box-shadow: 0 0 20px rgba($color: #0120309a, $alpha: 0.1);
+
+      &:hover {
+        background-color: #012030;
+      }
+    }
+  }
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+  @keyframes zoom-out {
+    from {
+      transform: translate(-50%, -50%) scale(0);
+    }
+    to {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
 }
