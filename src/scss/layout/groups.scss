@@ -19,11 +19,52 @@
     box-shadow: none;
   }
 }
-.ant-modal {
-  width: 520px;
+
+// Styles for group creation modal
+.group-creation-modal {
+  width: 520px !important;
   margin-left: 220px;
   transform-origin: -281px 191px 0px;
 }
+
+// Styles for member modal
+.member-modal {
+
+  .ant-modal-content {
+    background-color: #e0f7ffe5 !important;
+    border-radius: 30px 0 30px 30px !important;
+    width: 400px;
+    margin-left: 320px;
+    margin-top: 200px;
+    transform-origin: -281px 191px 0px;
+  }
+
+  .member-list-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(1, 32, 48, 0.1);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: rgba(1, 32, 48, 0.05);
+    }
+
+    img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+      border-radius: 50%;
+    }
+
+    span {
+      font-weight: 500;
+      color: #012030;
+    }
+  }
+}
+
 .ant-modal-footer {
   button {
     background-color: #0b75ffe5;
