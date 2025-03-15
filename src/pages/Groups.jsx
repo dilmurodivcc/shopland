@@ -83,7 +83,6 @@ const Groups = () => {
             </div>
             <div
               className="group-item"
-              onClick={showModal}
               style={{ cursor: "pointer" }}
             >
               <BsArrowReturnRight className="return" />
