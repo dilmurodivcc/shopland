@@ -11,7 +11,7 @@
 body {
   background: url(/Light_Back.svg), #e0f7ff;
   background-size: 103%;
-
+  overflow: hidden;
   // background-position:20%;
 }
 
@@ -19,6 +19,7 @@ body {
   margin: 0 auto;
   max-width: 1250px;
 }
+
 
 
 

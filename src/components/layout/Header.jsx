@@ -25,18 +25,18 @@ const Header = () => {
           </div>
           {group.length > 0 && (
             <div className="search-content">
-              <div className="line">
-                <p>Amirbek</p>
-                <button>join</button>
-              </div>
-              <div className="line">
-                <p>Amirbek</p>
-                <button>join</button>
-              </div>
-              <div className="line">
-                <p>Amirbek</p>
-                <button>join</button>
-              </div>
+              {isLoadingGroups ? (
+                <p className="loading">Loading groups...</p>
+              ) : groups.length > 0 ? (
+                groups.map((group, index) => (
+                  <div key={group.id || index} className="line">
+                    <p>{group.name}</p>
+                    <button>join</button>
+                  </div>
+                ))
+              ) : (
+                <p className="no-results">No groups found</p>
+              )}
             </div>
           )}
         </div>

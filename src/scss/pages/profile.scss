@@ -6,10 +6,15 @@
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
-  margin-top: 200px;
   border-radius: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
   background-color: #e0f7ffb0;
   padding: 20px;
+  animation: zom-out 0.8s ease-in-out forwards;
+  animation-fill-mode: forwards;
   .left {
     width: 50%;
     height: 100%;
@@ -48,4 +53,19 @@
         text-transform: capitalize;
     }
   }
+  @keyframes zom-out {
+    0% {
+      transform: translate(-50%, -50%) scale(0.0);
+      opacity: 0;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.3);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+  }
+  
 }

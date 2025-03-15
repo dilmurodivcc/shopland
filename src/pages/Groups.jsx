@@ -39,19 +39,30 @@ const Groups = () => {
               <h3>Groups</h3>
               <IoIosArrowDown className="arrow" />
             </div>
-            <div className="group-item" onClick={showModal} style={{ cursor: "pointer" }}>
+            <div
+              className="group-item"
+              onClick={showModal}
+              style={{ cursor: "pointer" }}
+            >
               <BsArrowReturnRight className="return" />
-              <h4> Create Group <FaPlus /></h4>
+              <h4>
+                {" "}
+                Create Group <FaPlus />
+              </h4>
             </div>
           </div>
-            <div className="group-list">
-              <div className="group-item">
-              <Empty className="empty" image={Empty.PRESENTED_IMAGE_SIMPLE} description="No groups found"  />
-              </div>
+          <div className="group-list">
+            <div className="group-item">
+              <Empty
+                className="empty"
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                description="No groups found"
+              />
             </div>
+          </div>
         </div>
-    
 
+        <div className="product-container"></div>
         <div className="drawer-user ">
           <Link className="username" to="/profile">
             <img src={avatar} alt="User Avatar" />
@@ -62,28 +73,41 @@ const Groups = () => {
               <h3>Groups</h3>
               <IoIosArrowDown className="arrow" />
             </div>
-            <div className="group-item" onClick={showModal} style={{ cursor: "pointer" }}>
+            <div
+              className="group-item"
+              onClick={showModal}
+              style={{ cursor: "pointer" }}
+            >
               <BsArrowReturnRight className="return" />
-              <h4> Create Group <FaPlus /></h4>
+              <h4>
+                {" "}
+                Create Group <FaPlus />
+              </h4>
             </div>
           </div>
-            <div className="group-list">
-              <div className="group-item">
-              <Empty className="empty" image={Empty.PRESENTED_IMAGE_SIMPLE} description="No groups found"  />
-              </div>
+          <div className="group-list">
+            <div className="group-item">
+              <Empty
+                className="empty"
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                description="No groups found"
+              />
             </div>
+          </div>
         </div>
       </div>
 
-
-      <Modal title="Group name and password"  open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      <Modal
+        title="Group name and password"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
         <Input
           placeholder="Enter group name"
-          
           value={groupName}
           onChange={(e) => setGroupName(e.target.value)}
-          style={{ marginBottom: "10px",}}
-          
+          style={{ marginBottom: "10px" }}
         />
         <Input.Password
           placeholder="Enter password"
