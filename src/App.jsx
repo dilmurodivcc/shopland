@@ -12,7 +12,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <RouterPage />
-          <Toaster position="top-right" closeButton />
+          <Toaster position="top-right" closeButton richColors />
         </BrowserRouter>
       </QueryClientProvider>
     </>

@@ -1,7 +1,6 @@
 import { create } from "zustand";
 
 const useStore = create((set) => {
-  // LocalStorage'dan authMode'ni olish
   const storedAuthMode = localStorage.getItem("authMode") || "login";
 
   return {

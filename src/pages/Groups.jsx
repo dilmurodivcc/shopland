@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Input, Button, Empty, Spin } from "antd";
+import { toast } from "sonner";
 import avatar from "../assets/6596121.png";
 import { IoIosArrowDown } from "react-icons/io";
 import { BsArrowReturnRight } from "react-icons/bs";
-import { FaPlus } from "react-icons/fa6";
+import { FaPlus, FaTrash, FaCartPlus } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { useMember } from "../hooks/useGroups";
+import {
+  useMember,
+  useMyGroups,
+  useCreateGroup,
+  useGroupItems,
+  useAddMember,
+} from "../hooks/useGroups";
 
 const Groups = () => {
   const userdata = JSON.parse(localStorage.getItem("user"));
@@ -14,8 +21,25 @@ const Groups = () => {
   const [groupName, setGroupName] = useState("");
   const [password, setPassword] = useState("");
   const [searchText, setSearchText] = useState("");
+  const [activeGroupId, setActiveGroupId] = useState(null);
+  const [itemTitle, setItemTitle] = useState("");
+  const [isAddingItem, setIsAddingItem] = useState(false);
+  const [isAddingMember, setIsAddingMember] = useState(false);
 
   const { members, isLoadingMember } = useMember(searchText);
+  const { myGroups, isLoadingMyGroups } = useMyGroups();
+  const { mutate: createGroup } = useCreateGroup();
+  const { addItemMutation, removeItemMutation, markItemAsBoughtMutation } =
+    useGroupItems();
+  const { mutate: addMember } = useAddMember();
+
+  const activeGroup = myGroups.find((group) => group._id === activeGroupId);
+
+  useEffect(() => {
+    if (myGroups && myGroups.length > 0 && !activeGroupId) {
+      setActiveGroupId(myGroups[0]._id);
+    }
+  }, [myGroups, activeGroupId]);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -26,8 +50,7 @@ const Groups = () => {
   };
 
   const handleOk = () => {
-    console.log("Group Name:", groupName);
-    console.log("Password:", password);
+    createGroup({ name: groupName, password });
     setIsModalOpen(false);
   };
 
@@ -41,8 +64,87 @@ const Groups = () => {
   };
 
   const handleAddMember = (member) => {
-    console.log("Selected member:", member);
-    // Add logic to add member to the group
+    if (!activeGroupId) {
+      toast.warning("Iltimos, avval guruhni tanlang");
+      return;
+    }
+
+    if (!member || !member._id) {
+      toast.error("A'zo ma'lumotlari to'liq emas");
+      return;
+    }
+
+    const isMemberAlreadyInGroup = activeGroup?.members?.some(
+      (existingMember) => existingMember._id === member._id
+    );
+
+    if (isMemberAlreadyInGroup) {
+      toast.warning("Bu foydalanuvchi allaqachon guruhga qo'shilgan");
+      return;
+    }
+
+    setIsAddingMember(true);
+    console.log("Adding member to group:", {
+      groupId: activeGroupId,
+      memberId: member._id,
+    });
+
+    addMember(
+      {
+        groupId: activeGroupId,
+        memberId: member._id,
+      },
+      {
+        onSuccess: () => {
+          setIsMemberModalOpen(false);
+          setSearchText("");
+          setIsAddingMember(false);
+        },
+        onError: (error) => {
+          console.error("Error adding member in component:", error);
+          setIsAddingMember(false);
+        },
+      }
+    );
+  };
+
+  const handleAddItem = (e) => {
+    e.preventDefault();
+    if (activeGroupId && itemTitle) {
+      const isItemDuplicate = activeGroup?.items?.some(
+        (item) => item.title.toLowerCase() === itemTitle.toLowerCase()
+      );
+
+      if (isItemDuplicate) {
+        toast.warning("Bu nomli mahsulot allaqachon mavjud");
+        return;
+      }
+
+      setIsAddingItem(true);
+      addItemMutation.mutate(
+        {
+          groupId: activeGroupId,
+          itemData: { title: itemTitle },
+        },
+        {
+          onSuccess: () => {
+            toast.success("Mahsulot muvaffaqiyatli qo'shildi!");
+            setItemTitle("");
+            setIsAddingItem(false);
+          },
+          onError: (error) => {
+            toast.error(`Xatolik yuz berdi: ${error.message}`);
+            setIsAddingItem(false);
+          },
+        }
+      );
+    } else {
+      toast.warning("Iltimos, guruh va mahsulot nomini kiriting");
+    }
+  };
+
+  const handleSelectGroup = (groupId) => {
+    setActiveGroupId(groupId);
   };
 
   return (
@@ -71,29 +173,80 @@ const Groups = () => {
             </div>
           </div>
           <div className="group-list">
-            <div className="group-item">
+            {isLoadingMyGroups ? (
+              <Spin />
+            ) : myGroups.length > 0 ? (
+              myGroups.map((group) => (
+                <div
+                  key={group._id}
+                  className={`group ${
+                    group._id === activeGroupId ? "active" : ""
+                  }`}
+                  onClick={() => handleSelectGroup(group._id)}
+                >
+                  <h4>{group.name}</h4>
+                </div>
+              ))
+            ) : (
               <Empty
                 className="empty"
                 image={Empty.PRESENTED_IMAGE_SIMPLE}
                 description="No groups found"
               />
-            </div>
+            )}
           </div>
         </div>
 
         <div className="product-container">
           <div className="product-header">
-            <h3>Items</h3>
-            <form>
-              <input type="text" placeholder="Write a Title of item.." />
-              <button>Add Item</button>
+            <h3>
+              {activeGroup ? activeGroup.name : "No Group Selected"} - Items
+            </h3>
+            <form onSubmit={handleAddItem}>
+              <input
+                type="text"
+                placeholder="Write a Title of item.."
+                value={itemTitle}
+                onChange={(e) => setItemTitle(e.target.value)}
+              />
+              <button type="submit" disabled={isAddingItem || !itemTitle}>
+                {isAddingItem ? "Qo'shilyapti..." : "Add Item"}
+              </button>
             </form>
+          </div>
+          <div className="items">
+            {activeGroup &&
+            activeGroup.items &&
+            activeGroup.items.length > 0 ? (
+              activeGroup.items.map((item) => (
+                <div key={item._id} className="item">
+                  <h4>{item.title} <span>by</span> ({item.owner.username})</h4>
+                <div className="btns">
+                <button className="card">
+                    <FaCartPlus />
+                  </button>
+                  <button className="delete">
+                    <FaTrash />
+                  </button>
+                </div>
+                </div>
+              ))
+            ) : (
+              <Empty
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                description="No items found"
+              />
+            )}
           </div>
         </div>
         <div className="drawer-user ">
           <div className="owner">
-            <h3> Owner:</h3>
-            <h4>Abdulloh (dilmurodvcc)</h4>
+            <h3>Owner:</h3>
+            <h4>
+              {activeGroup && activeGroup.owner
+                ? activeGroup.owner.username
+                : "No group selected"}
+            </h4>
           </div>
           <div className="group-items">
             <div className="title">
@@ -112,51 +265,22 @@ const Groups = () => {
             </div>
           </div>
           <div className="group-list">
-            {/* <Empty
+            {activeGroup &&
+            activeGroup.members &&
+            activeGroup.members.length > 0 ? (
+              activeGroup.members.map((member) => (
+                <div key={member._id} className="member">
+                  <img src={avatar} alt="User Avatar" />
+                  <h4>{member.username}</h4>
+                </div>
+              ))
+            ) : (
+              <Empty
                 className="empty"
                 image={Empty.PRESENTED_IMAGE_SIMPLE}
                 description="No members found"
-              /> */}
-            <div className="member">
-              <img src={avatar} alt="User Avatar" />
-              <h4>Abdulloh (dilmurodvcc)</h4>
-            </div>
-            <div className="member">
-              <img src={avatar} alt="User Avatar" />
-              <h4>Abdulloh (dilmurodvcc)</h4>
-            </div>
-            <div className="member">
-              <img src={avatar} alt="User Avatar" />
-              <h4>Abdulloh (dilmurodvcc)</h4>
-            </div>
-            <div className="member">
-              <img src={avatar} alt="User Avatar" />
-              <h4>Abdulloh (dilmurodvcc)</h4>
-            </div>
-            <div className="member">
-              <img src={avatar} alt="User Avatar" />
-              <h4>Abdulloh (dilmurodvcc)</h4>
-            </div>
-            <div className="member">
-              <img src={avatar} alt="User Avatar" />
-              <h4>Abdulloh (dilmurodvcc)</h4>
-            </div>
-            <div className="member">
-              <img src={avatar} alt="User Avatar" />
-              <h4>Abdulloh (dilmurodvcc)</h4>
-            </div>
-            <div className="member">
-              <img src={avatar} alt="User Avatar" />
-              <h4>Abdulloh (dilmurodvcc)</h4>
-            </div>
-            <div className="member">
-              <img src={avatar} alt="User Avatar" />
-              <h4>Abdulloh (dilmurodvcc)</h4>
-            </div>
-            <div className="member">
-              <img src={avatar} alt="User Avatar" />
-              <h4>Abdulloh (dilmurodvcc)</h4>
-            </div>
+              />
+            )}
           </div>
         </div>
       </div>
@@ -195,7 +319,7 @@ const Groups = () => {
           style={{ marginBottom: "10px" }}
         />
         <div style={{ maxHeight: "300px", overflowY: "auto" }}>
-          {isLoadingMember ? (
+          {isLoadingMember || isAddingMember ? (
             <div style={{ textAlign: "center", padding: "20px" }}>
               <Spin />
             </div>
@@ -204,7 +328,8 @@ const Groups = () => {
               <div
                 key={member._id}
                 className="member-list-item"
-                onClick={() => handleAddMember(member)}
+                onClick={() => !isAddingMember && handleAddMember(member)}
+                style={{ cursor: isAddingMember ? "not-allowed" : "pointer" }}
               >
                 <img src={avatar} alt="User Avatar" />
                 <span>{member.username}</span>

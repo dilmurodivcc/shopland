@@ -10,10 +10,7 @@ const RegisterForm = () => {
   const {registerMutation} = useAuth();
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log("Form submitted");
-    // console.log(e.target[0].value);
-    // console.log(e.target[1].value);
-    // console.log(e.target[2].value);
+
     registerMutation.mutate({ name: e.target[0].value, username: e.target[1].value, password: e.target[2].value});
     
     console.log({name: e.target[0].value, username: e.target[1].value, password: e.target[2].value});
