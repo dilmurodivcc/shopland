@@ -4,14 +4,7 @@
   position: relative;
   margin-top: 20px;
 }
-@keyframes drawer {
-  from {
-    transform: translateX(-100%) scale(0) translateY(-50%);
-  }
-  to {
-    transform: translateX(0) scale(1) translateY(-50%);
-  }
-}
+
 .drawer-user {
   position: absolute;
   height: 75%;
@@ -142,14 +135,7 @@
       }
     }
   }
-  @keyframes drawer-user {
-    from {
-      transform: translateX(100%) scale(0) translateY(-50%);
-    }
-    to {
-      transform: translateX(0) scale(1) translateY(-50%);
-    }
-  }
+
 }
 
 .drawer {
